@@ -46,15 +46,4 @@ class CategoryRequest extends FormRequest
             'name.unique' => 'このカテゴリー名は既に使用されています。',
         ];
     }
-    /**
-     * バリデーションメッセージ
-     */
-    public function messages(): array
-    {
-        return [
-            'name.required' => 'カテゴリー名は必須です。',
-            'name.max' => 'カテゴリー名は255文字以内で入力してください。',
-            'name.unique' => 'このカテゴリー名は既に使用されています。',
-        ];
-    }
 }
