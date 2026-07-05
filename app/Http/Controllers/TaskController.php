@@ -51,11 +51,8 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        // 他のユーザーのタスクにはアクセスできない
-        if ($task->user_id !== auth()->id()) {
-            abort(403);
-        }
-
+        // Policyによる認可チェック
+        $this->authorize('view', $task);
         $task->load('category');
 
         return view('tasks.show', compact('task'));
@@ -66,10 +63,8 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
-        // 他のユーザーのタスクにはアクセスできない
-        if ($task->user_id !== auth()->id()) {
-            abort(403);
-        }
+        // Policyによる認可チェック
+        $this->authorize('update', $task);
 
         $categories = Category::orderBy('name')->get();
 
@@ -81,10 +76,8 @@ class TaskController extends Controller
      */
     public function update(TaskRequest $request, Task $task)
     {
-        // 他のユーザーのタスクにはアクセスできない
-        if ($task->user_id !== auth()->id()) {
-            abort(403);
-        }
+        // Policyによる認可チェック
+        $this->authorize('update', $task);
 
         $task->update($request->validated());
 
@@ -97,10 +90,8 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
-        // 他のユーザーのタスクにはアクセスできない
-        if ($task->user_id !== auth()->id()) {
-            abort(403);
-        }
+        // Policyによる認可チェック
+        $this->authorize('update', $task);
 
         $task->delete();
 
